@@ -17,6 +17,6 @@ public class ApiExceptionHandlers {
 
     @ExceptionHandler(value = {NoSuchElementException.class})
     public ResponseEntity<String> noElementException(NoSuchElementException e, WebRequest req) {
-        return ResponseEntity.badRequest().body("Exception occured on request. Exception message: " + e.getMessage());
+        return ResponseEntity.notFound().build();
     }
 }
