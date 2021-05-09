@@ -2,21 +2,33 @@ package com.example.movieservice.movie.model;
 
 public class Movie {
 
-    private int id;
+    private Long id;
     private String name;
     private MovieType type;
 
-    public Movie(int id, String name, MovieType type) {
+    public Movie() {
+        this.id = 0L;
+        this.name = "";
+        this.type = null;
+    }
+
+    public Movie(Long id, String name, MovieType type) {
         this.id = id;
         this.name = name;
         this.type = type;
     }
 
-    public int getid() {
+    public Movie(String name, MovieType type) {
+        this.id = null;
+        this.name = name;
+        this.type = type;
+    }
+
+    public Long getid() {
         return id;
     }
 
-    public void setid(int id) {
+    public void setid(Long id) {
         this.id = id;
     }
 

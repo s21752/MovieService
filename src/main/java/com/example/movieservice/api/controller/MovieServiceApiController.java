@@ -3,10 +3,7 @@ package com.example.movieservice.api.controller;
 import com.example.movieservice.movie.model.Movie;
 import com.example.movieservice.movie.service.MovieService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,8 +28,26 @@ public class MovieServiceApiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
+    public ResponseEntity<Movie> getMovieById(@PathVariable Long id) {
         Movie movie = movieService.getMovieById(id);
         return ResponseEntity.ok(movie);
+    }
+
+    @PostMapping
+    public ResponseEntity<Movie> createNewMovie(@RequestBody Movie newMovie) {
+        Movie createdMovie = movieService.saveNewMovie(newMovie);
+        return ResponseEntity.ok(createdMovie);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie updatedMovie) {
+        Movie correctlyUpdatedMovie = movieService.updateMovie(updatedMovie, id);
+        return ResponseEntity.ok(correctlyUpdatedMovie);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
+        movieService.deleteMovie(id);
+        return ResponseEntity.noContent().build();
     }
 }

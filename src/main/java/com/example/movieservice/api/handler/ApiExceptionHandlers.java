@@ -12,7 +12,7 @@ public class ApiExceptionHandlers {
 
     @ExceptionHandler(value = {IllegalArgumentException.class})
     public ResponseEntity<String> illegalArgumentExceptionHandler(IllegalArgumentException e, WebRequest req) {
-        return ResponseEntity.badRequest().body("Exception occured on request. Exception message: " + e.getMessage());
+        return ResponseEntity.badRequest().body("Exception occurred on request. Exception message: " + e.getMessage());
     }
 
     @ExceptionHandler(value = {NoSuchElementException.class})
