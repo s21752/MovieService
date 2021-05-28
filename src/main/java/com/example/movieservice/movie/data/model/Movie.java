@@ -1,10 +1,24 @@
-package com.example.movieservice.movie.model;
+package com.example.movieservice.movie.data.model;
 
+import com.sun.istack.NotNull;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.lang.NonNull;
+
+import javax.persistence.*;
+
+@Entity()
 public class Movie {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Enumerated(EnumType.STRING)
     private MovieType type;
+
+    @NonNull
+    @Column(nullable = false, columnDefinition = "bit default false")
+    private Boolean isAvailable = false;
 
     public Movie() {
         this.id = 0L;
@@ -27,6 +41,11 @@ public class Movie {
     public Long getid() {
         return id;
     }
+
+    @NonNull
+    public Boolean getAvailable() { return isAvailable; }
+
+    public void setAvailable(@NonNull Boolean available) { isAvailable = available; }
 
     public void setid(Long id) {
         this.id = id;

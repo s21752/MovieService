@@ -1,6 +1,6 @@
 package com.example.movieservice.api.controller;
 
-import com.example.movieservice.movie.model.Movie;
+import com.example.movieservice.movie.data.model.Movie;
 import com.example.movieservice.movie.service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +20,18 @@ public class MovieServiceApiController {
     @RequestMapping("/exception")
     public void exceptionMapping() {
         throw new IllegalArgumentException("Generic illegal argument provided (╯ ͠° ͟ʖ ͡°)╯┻━┻");
+    }
+
+    @PostMapping("/available/{id}")
+    public ResponseEntity<Movie> setAvailable(@PathVariable Long id) {
+        Movie movie = movieService.setAvailable(id);
+        return ResponseEntity.ok(movie);
+    }
+
+    @PostMapping("/available")
+    public ResponseEntity<Movie> setAvailable(@RequestBody Movie movie) {
+        Movie updatedMovie = movieService.setAvailable(movie);
+        return ResponseEntity.ok(updatedMovie);
     }
 
     @GetMapping
